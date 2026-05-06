@@ -17,6 +17,7 @@ public class Hand {
         return cards.size();
     }
 
+
     public int getValue(){
         int value = 0;
 
@@ -27,5 +28,14 @@ public class Hand {
         }
 
         return value;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for(Card card: cards){
+           s.append(card.toString()).append(" ");
+       }
+       return s.toString();
     }
 }

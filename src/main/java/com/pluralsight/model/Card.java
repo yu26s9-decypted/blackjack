@@ -31,7 +31,7 @@ public class Card {
         if(isFaceUp){
             if(value.equals("A")) return 11;
             if(value.equals("K") || value.equals("Q") || value.equals("J")) return 10;
-            return Integer.parseInt(value);
+            return Integer.parseInt(this.value);
 
         } else {
             return 0;
@@ -56,7 +56,12 @@ public class Card {
         return  isFaceUp;
     }
 
-    public void flip(){
-        isFaceUp = !isFaceUp;
+    public boolean flip(){
+        return ((isFaceUp = !isFaceUp));
+    }
+
+    @Override
+    public String toString() {
+        return "[" + value + "]";
     }
 }
