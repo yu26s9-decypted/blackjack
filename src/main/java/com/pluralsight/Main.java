@@ -69,7 +69,12 @@ public class Main {
                 int userInputOption = Console.askForInt(msg, 1, 2);
 
                 switch (userInputOption){
-                    case 1 -> optionHit(deck, p1);
+                    case 1 -> {
+                        optionHit(deck, p1);
+                        if(p1.getValue() == 21){
+                            isPlaying = false;
+                        }
+                    }
                     case 2 -> {
                         stand(deck, p2);
                         isPlaying = false;
@@ -86,6 +91,32 @@ public class Main {
             }
 
 
+        }
+
+        if(!isPlaying){
+            System.out.println("Moment of truth...");
+            for(int i = 3; i > 0; i--){
+                try{
+                    Thread.sleep(1000);
+                    System.out.println(i);
+                } catch (InterruptedException e){
+                    System.out.println(e.getMessage());
+                }
+            }
+            System.out.println("Your hand: " + p1 + " Total: " + p1.getValue());
+            System.out.println("Bot hand: " + p2 + " Total: " + p2.getValue());
+
+            if (p1.getValue() > 21) {
+                System.out.println("You busted. Bot wins.");
+            } else if (p2.getValue() > 21) {
+                System.out.println("Bot busted. You win!");
+            } else if (p1.getValue() > p2.getValue()) {
+                System.out.println("You win!");
+            } else if (p1.getValue() < p2.getValue()) {
+                System.out.println("Bot wins.");
+            } else {
+                System.out.println("Draw!");
+            }
         }
     }
 
@@ -121,7 +152,7 @@ public class Main {
     public static boolean botEvaluate(Hand bot){
         Random random = new Random();
         // The bot always hit if val is under 10
-        if(bot.getValue() <= 10){
+        if(bot.getValue() <= 12){
             return true;
         }
         if(bot.getValue() < 16){
